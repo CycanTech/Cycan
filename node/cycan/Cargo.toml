@@ -1,0 +1,89 @@
+[package]
+name = "cycan"
+version = "0.1.0"
+authors = ["Cycan Technologies"]
+description = "Cycan Node"
+edition = "2018"
+build = "build.rs"
+homepage = "https://cycan.network/"
+repository = "https://github.com/CycanTech/Cycan/"
+
+[[bin]]
+name = "cycan"
+path = "src/main.rs"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+futures = "0.3.4"
+log = "0.4.8"
+structopt = "0.3.8"
+jsonrpc-core = "15.0.0"
+jsonrpc-pubsub = "15.0.0"
+serde_json = "1.0.64"
+
+sp-api = { version = "3.0.0" }
+sp-blockchain = { version = "3.0.0" }
+sc-rpc-api = { version = "0.9.0" }
+sc-rpc = { version = "3.0.0" }
+substrate-frame-rpc-system = { version = "3.0.0" }
+pallet-transaction-payment-rpc = { version = "3.0.0" }
+sc-cli = { version = "0.9.0" }
+sp-core = { version = "3.0.0" }
+sc-executor = { version = "0.9.0" }
+sc-service = { version = "0.9.0" }
+sp-inherents = { version = "3.0.0" }
+sc-transaction-pool = { version = "3.0.0" }
+sp-transaction-pool = { version = "3.0.0" }
+sc-network = { version = "0.9.0" }
+sc-consensus-babe = { version = "0.9.0" }
+sp-consensus-babe = { version = "0.9.0" }
+sc-consensus-manual-seal = { version = "0.9.0" }
+sp-consensus = { version = "0.9.0" }
+sc-consensus = { version = "0.9.0" }
+sp-timestamp = { version = "3.0.0" }
+pallet-evm = {version = "5.0.0", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-ethereum = {version = "3.0.0", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-dynamic-fee = {version = "3.0.0", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+
+sc-finality-grandpa = { version = "0.9.0" }
+sp-finality-grandpa = { version = "3.0.0" }
+sc-client-api = { version = "3.0.0" }
+sp-runtime = { version = "3.0.0" }
+sc-basic-authorship = { version = "0.9.0" }
+sp-block-builder = { version = "3.0.0" }
+sc-telemetry = { version = "3.0.0" }
+frame-benchmarking-cli = { version = "3.0.0" }
+frame-benchmarking = { version = "3.0.0" }
+
+
+fc-consensus = {version = "2.0.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fp-consensus = {version = "1.0.0", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+
+cycan-runtime = { path = "../../runtime/cycan" }
+phoenix-runtime = { path = "../../runtime/phoenix" }
+
+fc-rpc = {version = "2.0.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fp-rpc = {version = "2.1.0",  git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fc-rpc-core = {version = "1.1.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fc-db = {version = "2.0.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fc-mapping-sync = {version = "2.0.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+
+
+pallet-contracts  =  { version = '3.0.0' }
+pallet-contracts-rpc  =  { version = '3.0.0' }
+pallet-rgrandpa = { path = '../../frame/rgrandpa', version = '0.1.0' }
+pallet-im-online = { version = "3.0.0" }
+sp-authority-discovery = { version = "3.0.0" }
+
+[build-dependencies]
+substrate-build-script-utils = { version = "3.0.0" }
+
+[features]
+default = ["babe"]
+babe = ["cycan-runtime/babe"]
+manual-seal = ["cycan-runtime/manual-seal"]
+runtime-benchmarks = [
+	"cycan-runtime/runtime-benchmarks",
+]

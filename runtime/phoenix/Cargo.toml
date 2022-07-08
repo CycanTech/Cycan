@@ -1,0 +1,172 @@
+[package]
+name = "phoenix-runtime"
+version = "0.5.1"
+authors = ["Cycan Technologies"]
+edition = "2018"
+homepage = "https://cycan.network/"
+repository = "https://github.com/CycanTech/Cycan/"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
+serde = { version = "1.0.101", optional = true, features = ["derive"] }
+static_assertions = "1.1.0"
+
+frame-executive = { version = "3.0.0", default-features = false}
+frame-support = { version = "3.0.0", default-features = false}
+frame-system = { version = "3.0.0", default-features = false, package = "frame-system" }
+frame-system-rpc-runtime-api = { version = "3.0.0", default-features = false }
+
+pallet-evm = {version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-ethereum = {version = "3.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-dynamic-fee = {version = "3.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-evm-precompile-simple = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-evm-precompile-sha3fips = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-evm-precompile-modexp = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fp-rpc = {version = "2.1.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+
+pallet-babe = { version = "3.0.0", default-features = false }
+sp-consensus-babe = { version = "0.9.0", default-features = false }
+
+pallet-balances = { version = "3.0.0", default-features = false }
+pallet-grandpa = { version = "3.0.0", default-features = false }
+pallet-randomness-collective-flip = { version = "3.0.0", default-features = false }
+pallet-sudo = { version = "3.0.0", default-features = false }
+pallet-timestamp = { version = "3.0.0", default-features = false }
+pallet-transaction-payment = { version = "3.0.0", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { version = "3.0.0", default-features = false }
+
+sp-api = { version = "3.0.0", default-features = false }
+sp-block-builder = {version = "3.0.0", default-features = false}
+sp-core = { version = "3.0.0", default-features = false }
+sp-inherents = { version = "3.0.0",default-features = false}
+sp-io = { version = "3.0.0", default-features = false }
+sp-offchain = { version = "3.0.0", default-features = false }
+sp-runtime = { version = "3.0.0", default-features = false }
+sp-session = { version = "3.0.0", default-features = false}
+sp-std = { version = "3.0.0", default-features = false }
+sp-transaction-pool = { version = "3.0.0", default-features = false }
+sp-version = { version = "3.0.0", default-features = false }
+
+
+pallet-contracts = { default-features = false, version = '3.0.0'}
+pallet-contracts-primitives = { default-features = false, version = '3.0.0' }
+pallet-contracts-rpc-runtime-api = { default-features = false, version = '3.0.0' }
+log = { version = "0.4.14", default-features = false }
+pallet-evm-precompile-call-vm = {default-features = false, version = '0.1.0', path = "../../frame/evm/precompile/call-vm" }
+pallet-vm-bridge = {default-features = false, version = '0.1.0', path = "../../frame/vm-bridge" }
+
+pallet-session = { version = "3.0.0",features = ["historical"], default-features = false }
+pallet-staking = { version = "3.0.0",default-features = false }
+pallet-staking-reward-curve = {  version = "3.0.0",default-features = false}
+sp-staking = { version = "3.0.0",default-features = false }
+
+# benchmarking dependencies
+frame-benchmarking = { version = "3.0.0", default-features = false, optional = true }
+frame-system-benchmarking = { version = "3.0.0", default-features = false,  optional = true }
+pallet-rgrandpa = { default-features = false, path = '../../frame/rgrandpa', version = '0.1.0' }
+pallet-im-online = { version = "3.0.0", default-features = false }
+pallet-utility = { default-features = false, version = '3.0.0'}
+pallet-offences = { version = "3.0.0", default-features = false }
+pallet-offences-benchmarking = { version = "3.0.0",  default-features = false, optional = true }
+pallet-authorship = { version = "3.0.0", default-features = false }
+pallet-indices = { version = "3.0.0", default-features = false }
+pallet-tips = { version = "3.0.0", default-features = false }
+pallet-treasury = { version = "3.0.0", default-features = false }
+pallet-bounties = { version = "3.0.0", default-features = false }
+
+pallet-membership = { version = "3.0.0", default-features = false }
+pallet-elections-phragmen = { version = "3.0.0", default-features = false }
+pallet-democracy = { version = "3.0.0", default-features = false }
+pallet-collective = { version = "3.0.0", default-features = false }
+pallet-scheduler = { version = "3.0.0", default-features = false }
+sp-authority-discovery = { version = "3.0.0", default-features = false}
+pallet-authority-discovery = { version = "3.0.0", default-features = false}
+pallet-multisig = { version = "3.0.0", default-features = false }
+
+pallet-esbind = { default-features = false, path = '../../frame/esbind', version = '0.1.0' }
+#pallet-upgrade-test= { default-features = false, path = '../../frame/upgrade-test', version = '2.0.0' }
+[build-dependencies]
+substrate-wasm-builder = { version = "3.0.0" }
+
+[features]
+default = ["std", "babe"]
+babe = []
+manual-seal = []
+std = [
+	"codec/std",
+	"serde",
+
+	"frame-executive/std",
+	"frame-support/std",
+	"frame-system-rpc-runtime-api/std",
+	"frame-system/std",
+	"fp-rpc/std",
+
+	"pallet-ethereum/std",
+	"pallet-evm/std",
+	"pallet-dynamic-fee/std",
+	"pallet-evm-precompile-simple/std",
+	"pallet-evm-precompile-sha3fips/std",
+	"pallet-babe/std",
+	"pallet-balances/std",
+	"pallet-grandpa/std",
+	"pallet-randomness-collective-flip/std",
+	"pallet-sudo/std",
+	"pallet-timestamp/std",
+	"pallet-transaction-payment-rpc-runtime-api/std",
+	"pallet-transaction-payment/std",
+	"sp-api/std",
+	"sp-block-builder/std",
+	"sp-consensus-babe/std",
+	"sp-core/std",
+	"sp-inherents/std",
+	"sp-io/std",
+	"sp-offchain/std",
+	"sp-runtime/std",
+	"sp-session/std",
+	"sp-std/std",
+	"sp-transaction-pool/std",
+	"sp-version/std",
+	"frame-benchmarking/std",
+	"frame-system-benchmarking/std",
+	'pallet-contracts/std',
+	'pallet-contracts-primitives/std',
+	'pallet-contracts-rpc-runtime-api/std',
+	'pallet-vm-bridge/std',
+	'pallet-evm-precompile-call-vm/std',
+	'pallet-session/std',
+	'pallet-staking/std',
+	'sp-staking/std',
+	'pallet-rgrandpa/std',
+	"pallet-im-online/std",
+	"pallet-offences/std",
+	"pallet-authorship/std",
+	"pallet-indices/std",
+	"pallet-bounties/std",
+	"pallet-treasury/std",
+	"pallet-tips/std",
+	"pallet-membership/std",
+	"pallet-elections-phragmen/std",
+	"pallet-democracy/std",
+	"pallet-collective/std",
+	"pallet-scheduler/std",
+	"pallet-utility/std",
+	"pallet-authority-discovery/std",
+	"sp-authority-discovery/std",
+	"pallet-multisig/std",
+	"pallet-esbind/std",
+#	"pallet-upgrade-test/std",
+]
+runtime-benchmarks = [
+	"frame-benchmarking",
+	"frame-system-benchmarking",
+	"frame-system/runtime-benchmarks",
+	"pallet-evm/runtime-benchmarks",
+	'pallet-rgrandpa/runtime-benchmarks',
+	"pallet-offences-benchmarking",
+	'pallet-collective/runtime-benchmarks',
+	'pallet-esbind/runtime-benchmarks',
+]

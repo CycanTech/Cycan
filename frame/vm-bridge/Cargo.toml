@@ -1,0 +1,69 @@
+[package]
+name = "pallet-vm-bridge"
+version = "0.1.0"
+edition = "2018"
+description = "VM Bridge for VMs calling each other"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false }
+serde = { version = '1.0.125', default-features = false, features = ['derive'] }
+serde_json = { version = '1.0.64', default-features = false, features = ['alloc'] }
+lite-json = { version = "0.1", default-features = false }
+log = { version = "0.4.14", default-features = false }
+hex = { version = "0.4.3", default-features = false, features = ['alloc'] }
+#getrandom = { version = "0.2", features = ["js"] }
+
+frame-support = { version = "3.0.0", default-features = false}
+frame-system = { version = "3.0.0", default-features = false }
+sp-core = { version = "3.0.0", default-features = false}
+sp-io = { version = "3.0.0", default-features = false }
+sp-runtime = { version = "3.0.0", default-features = false }
+sp-std = { version = "3.0.0", default-features = false }
+pallet-contracts = { version = "3.0.0", default-features = false}
+pallet-evm = {version = "5.0.0", default-features = false,  git = "https://github.com/CycanTech/frontier",branch = "v3" }
+fp-evm = {version = "2.0.0", default-features = false,  git = "https://github.com/CycanTech/frontier",branch = "v3" }
+
+byte-slice-cast= { version = "1.0.0", default-features = false }
+sha3 = { version = "0.8", default-features = false }
+blake2-rfc = { version = "0.2.18", default-features = false }
+
+
+[dev-dependencies]
+assert_matches = "1"
+hex-literal = "0.3"
+paste = "1"
+pretty_assertions = "0.7"
+wat = "1"
+pallet-balances = { version = "3.0.0" }
+pallet-timestamp = { version = "3.0.0" }
+pallet-randomness-collective-flip = { version = "3.0.0"}
+
+pallet-evm-precompile-simple = {version = "2.0.0-dev", git = "https://github.com/CycanTech/frontier",branch = "v3" }
+pallet-evm-precompile-call-vm = { version = "0.1.0", path = "../evm/precompile/call-vm" }
+ink_env = { git = "https://github.com/paritytech/ink",  version = "3.0.0-rc3" }
+
+[features]
+default = ["std"]
+std = [
+	"codec/std",
+	"frame-support/std",
+	"frame-system/std",
+	"serde/std",
+	"lite-json/std",
+	"hex/std",
+	"sp-core/std",
+	"sp-io/std",
+	"sp-runtime/std",
+	"sp-std/std",
+	"log/std",
+	"serde_json/std",
+	"byte-slice-cast/std",
+	"sha3/std",
+	"blake2-rfc/std",
+	"pallet-contracts/std",
+	"pallet-evm/std",
+	"fp-evm/std",
+]

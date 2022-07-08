@@ -1,0 +1,15 @@
+[workspace]
+members = [
+	"frame/evm/precompile/call-vm",
+	"frame/vm-bridge",
+	"frame/rgrandpa",
+	"frame/esbind",
+#	"frame/upgrade-test",
+	"node/cycan",
+	"runtime/cycan",
+	"runtime/phoenix",
+]
+
+[profile.release]
+panic = "unwind"
+
