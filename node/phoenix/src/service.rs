@@ -35,7 +35,7 @@ use std::{
 	sync::{Arc, Mutex},
 	time::Duration,
 };
-
+use sc_telemetry::{TelemetryConnectionNotifier, TelemetrySpan};
 use crate::cli::Cli;
 
 // Our native executor instance.
@@ -166,7 +166,7 @@ pub fn new_partial(
 			client.clone(),
 			select_chain.clone(),
 			inherent_data_providers.clone(),
-			&task_manager.spawn_handle(),
+			&task_manager.spawn_essential_handle(),
 			config.prometheus_registry(),
 			sp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone()),
 		)?;
@@ -285,7 +285,8 @@ pub fn new_full(mut config: Configuration, cli: &Cli) -> Result<TaskManager, Ser
 		)
 		.for_each(|()| futures::future::ready(())),
 	);
-
+	let telemetry_span = TelemetrySpan::new();
+	let _telemetry_span_entered = telemetry_span.enter();
 	let (_rpc_handlers, telemetry_connection_notifier) = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
 		network: network.clone(),
 		client: client.clone(),
@@ -299,6 +300,7 @@ pub fn new_full(mut config: Configuration, cli: &Cli) -> Result<TaskManager, Ser
 		network_status_sinks,
 		system_rpc_tx,
 		config,
+		telemetry_span: Some(telemetry_span.clone()),
 	})?;
 
 	// Spawn Frontier EthFilterApi maintenance task.
