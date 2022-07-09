@@ -1,30 +1,34 @@
-// Copyright 2020-2022 Cycan.
-// This file is part of Cycan.
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
+// This file is part of Substrate.
 
-// Cycan is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
+// Copyright (C) 2017-2021 Parity Technologies (UK) Ltd.
+// SPDX-License-Identifier: Apache-2.0
 
-// Cycan is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// 	http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-// You should have received a copy of the GNU General Public License
-// along with Cycan. If not, see <http://www.gnu.org/licenses/>.
-
-use crate::chain_spec;
-use crate::cli::{Cli, Subcommand};
-use crate::service;
-use crate::service::{frontier_database_dir, new_partial};
-use sc_cli::{ChainSpec, Role, RuntimeVersion, SubstrateCli};
+use clap::Parser;
+use phoenix_runtime::Block;
+use sc_cli::{ChainSpec, RuntimeVersion, SubstrateCli};
 use sc_service::PartialComponents;
+
+use crate::{
+	chain_spec,
+	cli::{Cli, Subcommand},
+	service::{self, frontier_database_dir},
+};
 
 impl SubstrateCli for Cli {
 	fn impl_name() -> String {
-		"Phoenix Node".into()
+		"Frontier Node".into()
 	}
 
 	fn impl_version() -> String {
@@ -36,11 +40,11 @@ impl SubstrateCli for Cli {
 	}
 
 	fn author() -> String {
-		"Cycan Technologies".into()
+		env!("CARGO_PKG_AUTHORS").into()
 	}
 
 	fn support_url() -> String {
-		"https://cycan.network/".into()
+		"support.anonymous.an".into()
 	}
 
 	fn copyright_start_year() -> i32 {
@@ -51,8 +55,6 @@ impl SubstrateCli for Cli {
 		Ok(match id {
 			"dev" => Box::new(chain_spec::development_config()?),
 			"" | "local" => Box::new(chain_spec::local_testnet_config()?),
-			"beta" => Box::new(chain_spec::beta_config()?),
-			"stage" => Box::new(chain_spec::stage_config()?),
 			path => Box::new(chain_spec::ChainSpec::from_json_file(
 				std::path::PathBuf::from(path),
 			)?),
@@ -66,9 +68,10 @@ impl SubstrateCli for Cli {
 
 /// Parse and run command line arguments
 pub fn run() -> sc_cli::Result<()> {
-	let cli = Cli::from_args();
+	let cli = Cli::parse();
 
 	match &cli.subcommand {
+		Some(Subcommand::Key(cmd)) => cmd.run(&cli),
 		Some(Subcommand::BuildSpec(cmd)) => {
 			let runner = cli.create_runner(cmd)?;
 			runner.sync_run(|config| cmd.run(config.chain_spec, config.network))
@@ -81,7 +84,7 @@ pub fn run() -> sc_cli::Result<()> {
 					task_manager,
 					import_queue,
 					..
-				} = new_partial(&config, &cli)?;
+				} = service::new_partial(&config, &cli)?;
 				Ok((cmd.run(client, import_queue), task_manager))
 			})
 		}
@@ -92,7 +95,7 @@ pub fn run() -> sc_cli::Result<()> {
 					client,
 					task_manager,
 					..
-				} = new_partial(&config, &cli)?;
+				} = service::new_partial(&config, &cli)?;
 				Ok((cmd.run(client, config.database), task_manager))
 			})
 		}
@@ -103,7 +106,7 @@ pub fn run() -> sc_cli::Result<()> {
 					client,
 					task_manager,
 					..
-				} = new_partial(&config, &cli)?;
+				} = service::new_partial(&config, &cli)?;
 				Ok((cmd.run(client, config.chain_spec), task_manager))
 			})
 		}
@@ -115,7 +118,7 @@ pub fn run() -> sc_cli::Result<()> {
 					task_manager,
 					import_queue,
 					..
-				} = new_partial(&config, &cli)?;
+				} = service::new_partial(&config, &cli)?;
 				Ok((cmd.run(client, import_queue), task_manager))
 			})
 		}
@@ -123,7 +126,7 @@ pub fn run() -> sc_cli::Result<()> {
 			let runner = cli.create_runner(cmd)?;
 			runner.sync_run(|config| {
 				// Remove Frontier offchain db
-				let frontier_database_config = sc_service::DatabaseConfig::RocksDb {
+				let frontier_database_config = sc_service::DatabaseSource::RocksDb {
 					path: frontier_database_dir(&config),
 					cache_size: 0,
 				};
@@ -139,30 +142,26 @@ pub fn run() -> sc_cli::Result<()> {
 					task_manager,
 					backend,
 					..
-				} = new_partial(&config, &cli)?;
+				} = service::new_partial(&config, &cli)?;
 				Ok((cmd.run(client, backend), task_manager))
 			})
 		}
 		Some(Subcommand::Benchmark(cmd)) => {
 			if cfg!(feature = "runtime-benchmarks") {
 				let runner = cli.create_runner(cmd)?;
-				runner.sync_run(|config| {
-					cmd.run::<phoenix_runtime::Block, service::Executor>(config)
-				})
+
+				runner.sync_run(|config| cmd.run::<Block, service::ExecutorDispatch>(config))
 			} else {
-				Err("Benchmarking wasn't enabled when building the node. \
-				You can enable it with `--features runtime-benchmarks`."
-					.into())
+				Err(
+					"Benchmarking wasn't enabled when building the node. You can enable it with `--features runtime-benchmarks`."
+						.into(),
+				)
 			}
 		}
 		None => {
 			let runner = cli.create_runner(&cli.run.base)?;
 			runner.run_node_until_exit(|config| async move {
-				match config.role {
-					Role::Light => service::new_light(config),
-					_ => service::new_full(config, &cli),
-				}
-				.map_err(sc_cli::Error::Service)
+				service::new_full(config, &cli).map_err(sc_cli::Error::Service)
 			})
 		}
 	}

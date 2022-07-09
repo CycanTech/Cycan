@@ -1,126 +1,93 @@
 [package]
 name = "phoenix-runtime"
-version = "0.5.1"
-authors = ["Cycan Technologies"]
-edition = "2018"
-homepage = "https://cycan.network/"
-repository = "https://github.com/CycanTech/Cycan/"
+version = "0.0.0"
+authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
+edition = "2021"
+license = "Unlicense"
+homepage = "https://substrate.io"
+repository = "https://github.com/substrate-developer-hub/frontier-node-template/"
+publish = false
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
-serde = { version = "1.0.101", optional = true, features = ["derive"] }
+serde = { version = "1.0.101", features = ["derive"], optional = true }
+log = { version = "0.4.14", default-features = false }
 static_assertions = "1.1.0"
 
-frame-executive = { version = "3.0.0", default-features = false}
-frame-support = { version = "3.0.0", default-features = false}
-frame-system = { version = "3.0.0", default-features = false, package = "frame-system" }
-frame-system-rpc-runtime-api = { version = "3.0.0", default-features = false }
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
+scale-info = { version = "1.0.0", default-features = false, features = ["derive"] }
+sp-api = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-block-builder = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-core = { version = "5.0.0", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-inherents = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-io = { version = "5.0.0", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-offchain = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-runtime = { version = "5.0.0", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-session = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-std = { version = "4.0.0", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-transaction-pool = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-version = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+sp-npos-elections = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
 
-pallet-evm = {version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-pallet-ethereum = {version = "3.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-pallet-dynamic-fee = {version = "3.0.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-pallet-evm-precompile-simple = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-pallet-evm-precompile-sha3fips = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-pallet-evm-precompile-modexp = {version = "2.0.0-dev", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
-fp-rpc = {version = "2.1.0", default-features = false, git = "https://github.com/CycanTech/frontier",branch = "v3" }
+frame-executive = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+frame-support = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+frame-system = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+frame-system-rpc-runtime-api = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-babe = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-balances = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-grandpa = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-randomness-collective-flip = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-sudo = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-timestamp = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-transaction-payment = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false }
 
-pallet-babe = { version = "3.0.0", default-features = false }
-sp-consensus-babe = { version = "0.9.0", default-features = false }
-
-pallet-balances = { version = "3.0.0", default-features = false }
-pallet-grandpa = { version = "3.0.0", default-features = false }
-pallet-randomness-collective-flip = { version = "3.0.0", default-features = false }
-pallet-sudo = { version = "3.0.0", default-features = false }
-pallet-timestamp = { version = "3.0.0", default-features = false }
-pallet-transaction-payment = { version = "3.0.0", default-features = false }
-pallet-transaction-payment-rpc-runtime-api = { version = "3.0.0", default-features = false }
-
-sp-api = { version = "3.0.0", default-features = false }
-sp-block-builder = {version = "3.0.0", default-features = false}
-sp-core = { version = "3.0.0", default-features = false }
-sp-inherents = { version = "3.0.0",default-features = false}
-sp-io = { version = "3.0.0", default-features = false }
-sp-offchain = { version = "3.0.0", default-features = false }
-sp-runtime = { version = "3.0.0", default-features = false }
-sp-session = { version = "3.0.0", default-features = false}
-sp-std = { version = "3.0.0", default-features = false }
-sp-transaction-pool = { version = "3.0.0", default-features = false }
-sp-version = { version = "3.0.0", default-features = false }
-
-
-pallet-contracts = { default-features = false, version = '3.0.0'}
-pallet-contracts-primitives = { default-features = false, version = '3.0.0' }
-pallet-contracts-rpc-runtime-api = { default-features = false, version = '3.0.0' }
-log = { version = "0.4.14", default-features = false }
-pallet-evm-precompile-call-vm = {default-features = false, version = '0.1.0', path = "../../frame/evm/precompile/call-vm" }
-pallet-vm-bridge = {default-features = false, version = '0.1.0', path = "../../frame/vm-bridge" }
-
-pallet-session = { version = "3.0.0",features = ["historical"], default-features = false }
-pallet-staking = { version = "3.0.0",default-features = false }
-pallet-staking-reward-curve = {  version = "3.0.0",default-features = false}
-sp-staking = { version = "3.0.0",default-features = false }
+fp-rpc = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+fp-self-contained = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-base-fee = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-dynamic-fee = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-ethereum = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-evm = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-evm-precompile-simple = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-evm-precompile-sha3fips = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
+pallet-evm-precompile-modexp = { default-features = false, git = "https://github.com/CycanTech/frontier", branch = "v4" }
 
 # benchmarking dependencies
-frame-benchmarking = { version = "3.0.0", default-features = false, optional = true }
-frame-system-benchmarking = { version = "3.0.0", default-features = false,  optional = true }
-pallet-rgrandpa = { default-features = false, path = '../../frame/rgrandpa', version = '0.1.0' }
-pallet-im-online = { version = "3.0.0", default-features = false }
-pallet-utility = { default-features = false, version = '3.0.0'}
-pallet-offences = { version = "3.0.0", default-features = false }
-pallet-offences-benchmarking = { version = "3.0.0",  default-features = false, optional = true }
-pallet-authorship = { version = "3.0.0", default-features = false }
-pallet-indices = { version = "3.0.0", default-features = false }
-pallet-tips = { version = "3.0.0", default-features = false }
-pallet-treasury = { version = "3.0.0", default-features = false }
-pallet-bounties = { version = "3.0.0", default-features = false }
+frame-benchmarking = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false, optional = true }
+frame-system-benchmarking = { version = "4.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf", default-features = false, optional = true }
+node-primitives = { version = "2.0.0", default-features = false, path = "../../primitives" }
 
-pallet-membership = { version = "3.0.0", default-features = false }
-pallet-elections-phragmen = { version = "3.0.0", default-features = false }
-pallet-democracy = { version = "3.0.0", default-features = false }
-pallet-collective = { version = "3.0.0", default-features = false }
-pallet-scheduler = { version = "3.0.0", default-features = false }
-sp-authority-discovery = { version = "3.0.0", default-features = false}
-pallet-authority-discovery = { version = "3.0.0", default-features = false}
-pallet-multisig = { version = "3.0.0", default-features = false }
+sp-staking = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-session = { version = "4.0.0-dev", features = [ "historical" ], default-features = false , git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-staking = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf"  }
+pallet-staking-reward-curve = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf"  }
+pallet-contracts = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-contracts-primitives = { version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-contracts-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-offences = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-indices = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+sp-consensus-babe = { version = "0.10.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-authorship = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+frame-election-provider-support = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-election-provider-multi-phase = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-elections-phragmen = { version = "5.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+pallet-bags-list = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
 
-pallet-esbind = { default-features = false, path = '../../frame/esbind', version = '0.1.0' }
-#pallet-upgrade-test= { default-features = false, path = '../../frame/upgrade-test', version = '2.0.0' }
+
 [build-dependencies]
-substrate-wasm-builder = { version = "3.0.0" }
+substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
 
 [features]
-default = ["std", "babe"]
-babe = []
-manual-seal = []
+default = ["std"]
 std = [
-	"codec/std",
 	"serde",
 
-	"frame-executive/std",
-	"frame-support/std",
-	"frame-system-rpc-runtime-api/std",
-	"frame-system/std",
-	"fp-rpc/std",
-
-	"pallet-ethereum/std",
-	"pallet-evm/std",
-	"pallet-dynamic-fee/std",
-	"pallet-evm-precompile-simple/std",
-	"pallet-evm-precompile-sha3fips/std",
-	"pallet-babe/std",
-	"pallet-balances/std",
-	"pallet-grandpa/std",
-	"pallet-randomness-collective-flip/std",
-	"pallet-sudo/std",
-	"pallet-timestamp/std",
-	"pallet-transaction-payment-rpc-runtime-api/std",
-	"pallet-transaction-payment/std",
+	"codec/std",
+	"scale-info/std",
 	"sp-api/std",
 	"sp-block-builder/std",
-	"sp-consensus-babe/std",
 	"sp-core/std",
 	"sp-inherents/std",
 	"sp-io/std",
@@ -130,43 +97,52 @@ std = [
 	"sp-std/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
-	"frame-benchmarking/std",
-	"frame-system-benchmarking/std",
-	'pallet-contracts/std',
-	'pallet-contracts-primitives/std',
-	'pallet-contracts-rpc-runtime-api/std',
-	'pallet-vm-bridge/std',
-	'pallet-evm-precompile-call-vm/std',
-	'pallet-session/std',
-	'pallet-staking/std',
-	'sp-staking/std',
-	'pallet-rgrandpa/std',
-	"pallet-im-online/std",
+
+	"frame-executive/std",
+	"frame-support/std",
+	"frame-system-rpc-runtime-api/std",
+	"frame-system/std",
+	"pallet-babe/std",
+	"pallet-balances/std",
+	"pallet-grandpa/std",
+	"pallet-randomness-collective-flip/std",
+	"pallet-sudo/std",
+	"pallet-timestamp/std",
+	"pallet-transaction-payment-rpc-runtime-api/std",
+	"pallet-transaction-payment/std",
+
+	"fp-rpc/std",
+	"fp-self-contained/std",
+	"pallet-base-fee/std",
+	"pallet-dynamic-fee/std",
+	"pallet-ethereum/std",
+	"pallet-evm/std",
+	"pallet-evm-precompile-simple/std",
+	"pallet-evm-precompile-sha3fips/std",
+	"log/std",
+	"pallet-session/std",
+	"sp-staking/std",
+	"pallet-staking/std",
+	"pallet-contracts/std",
+	"pallet-contracts-primitives/std",
+	"pallet-contracts-rpc-runtime-api/std",
 	"pallet-offences/std",
-	"pallet-authorship/std",
 	"pallet-indices/std",
-	"pallet-bounties/std",
-	"pallet-treasury/std",
-	"pallet-tips/std",
-	"pallet-membership/std",
+	"sp-consensus-babe/std",
+	"sp-npos-elections/std",
+	"pallet-authorship/std",
 	"pallet-elections-phragmen/std",
-	"pallet-democracy/std",
-	"pallet-collective/std",
-	"pallet-scheduler/std",
-	"pallet-utility/std",
-	"pallet-authority-discovery/std",
-	"sp-authority-discovery/std",
-	"pallet-multisig/std",
-	"pallet-esbind/std",
-#	"pallet-upgrade-test/std",
+	"pallet-election-provider-multi-phase/std",
+	"pallet-bags-list/std",
+	#"frame-benchmarking/std",
+	#"frame-system-benchmarking/std",
 ]
 runtime-benchmarks = [
-	"frame-benchmarking",
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-support/runtime-benchmarks",
+	#"frame-benchmarking",
 	"frame-system-benchmarking",
 	"frame-system/runtime-benchmarks",
+	"pallet-ethereum/runtime-benchmarks",
 	"pallet-evm/runtime-benchmarks",
-	'pallet-rgrandpa/runtime-benchmarks',
-	"pallet-offences-benchmarking",
-	'pallet-collective/runtime-benchmarks',
-	'pallet-esbind/runtime-benchmarks',
 ]

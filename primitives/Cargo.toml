@@ -1,0 +1,32 @@
+[package]
+name = "node-primitives"
+version = "2.0.0"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2021"
+license = "Apache-2.0"
+homepage = "https://substrate.io"
+repository = "https://github.com/CycanTech/substrate/"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = [
+	"derive",
+] }
+scale-info = { version = "1.0", default-features = false, features = ["derive"] }
+frame-system = { version = "4.0.0-dev", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf"}
+sp-application-crypto = { version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+sp-core = { version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+sp-runtime = { version = "5.0.0", default-features = false, git = "https://github.com/CycanTech/substrate", rev = "4bc2af13cd81007a2a340d0333062179420d5daf" }
+
+[features]
+default = ["std"]
+std = [
+	"codec/std",
+	"scale-info/std",
+	"frame-system/std",
+	"sp-application-crypto/std",
+	"sp-core/std",
+	"sp-runtime/std",
+]
