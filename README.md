@@ -134,7 +134,7 @@ Terminal 4 run:
 ./target/release/cycan   --base-path /tmp/dave   --chain=beta   --port 30336 --ws-port 9948 --rpc-port 9936 --bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWMwqgHC8bsZ7nixSagXUhZ6wG4qURLXCm4Q9YzzGr6Cee" "/ip4/127.0.0.1/tcp/30334/p2p/12D3KooWLfM4y2FHZxMrNmyD6Xon4tC55T1qCEtiB2mJq8WcpfYH" "/ip4/127.0.0.1/tcp/30335/p2p/12D3KooWG6n3bXcogzzmvstDMRBaYwSadHHnVCMzkF6NSt2pbAWm" "/ip4/127.0.0.1/tcp/30336/p2p/12D3KooWBpV8LsrpxdCLeEfWwVDaEtVijdB8hMtJ6mC1TaXUQFAF" --node-key ea8a1d99f96b7680419eaccaa40c73d61ac1c19801392f064255d49d93bc02e7   --validator --rpc-cors=all --no-mdns --keystore-path ./keystore/4
 ```
 
-all [node key](https://docs.substrate.io/tutorials/v3/private-network/) above is generate by [Subkey](https://docs.substrate.io/v3/tools/subkey/).
+all [node key](https://docs.substrate.io/tutorials/get-started/simulate-network/) above is generate by [Subkey](https://docs.substrate.io/reference/command-line-tools/subkey/).
 
 The command and output are as follows:
 
